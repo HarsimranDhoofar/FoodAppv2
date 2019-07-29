@@ -27,8 +27,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
-        mEmailField = findViewById(R.id.txt_signUp_username);
-        mPasswordField = findViewById(R.id.txt_signUp_password);
+        mEmailField = findViewById(R.id.txt_signIn_username);
+        mPasswordField = findViewById(R.id.txt_signIn_password);
         signUpbtn = (FloatingActionButton) findViewById(R.id.fbt_signIn_signIn);//Don't need to type casting in android studio 3
 
         signUpbtn.setOnClickListener(new View.OnClickListener() {
