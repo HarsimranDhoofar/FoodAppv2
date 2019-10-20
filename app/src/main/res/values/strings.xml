@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">FoodApp</string>
+    <string name="app_name">FOOD APP</string>
     <string name="title_activity_dashboard">Home</string>
     <string name="tab_text_1">Home</string>
     <string name="tab_text_2">New Providers</string>
+    <string name="hint_username">User Name</string>
+    <string name="hint_password">Password</string>
+    <string name="button_signIn">Sign In</string>
+    <string name="button_newAccount">Create New Account</string>
+    <string name="profile_title">Profile</string>
 </resources>

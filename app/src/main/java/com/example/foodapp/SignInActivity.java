@@ -14,21 +14,29 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private EditText mEmailField;
-    private EditText mPasswordField;
-    private Button signInbtn;
+    private TextInputLayout usernameTextInput;
+    private TextInputEditText mEmailField;
+    private TextInputLayout passwordTextInput;
+    private TextInputEditText mPasswordField;
+  //  private EditText mEmailField;
+ //   private EditText mPasswordField;
+   private MaterialButton signInbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         mAuth = FirebaseAuth.getInstance();
+
         mEmailField = findViewById(R.id.txt_signIn_username);
         mPasswordField = findViewById(R.id.txt_signIn_password);
         signInbtn =findViewById(R.id.bt_signIn_signIn);//Don't need to type casting in android studio 3
