@@ -1,5 +1,7 @@
 package com.example.foodapp;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.foodapp.ui.main.ViewPagerAdapter;
@@ -8,17 +10,25 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.foodapp.ui.main.SectionsPagerAdapter;
 
 public class Dashboard extends AppCompatActivity {
+
+    private CoordinatorLayout mCoordinatorLayout;
+    private ImageView profileImg;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +42,15 @@ public class Dashboard extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(myToolbar);
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.clayout);
+        profileImg = (ImageView) findViewById(R.id.profilebtn);
+//        mCoordinatorLayout.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+//
+//            }
+//
+//        });
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -42,12 +61,30 @@ public class Dashboard extends AppCompatActivity {
             }
         });
     }
-//    private void setUpToolbar(View view) {
-//        Toolbar toolbar = view.findViewById(R.id.app_bar);
-//        AppCompatActivity activity = (AppCompatActivity) getActivity();
-//        if (activity != null) {
-//            activity.setSupportActionBar(toolbar);
-//        }
-//    }
+    // create an action bar button
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
+        // If you don't have res/menu, just create a directory named "menu" inside res
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle button activities
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.profilebtn) {
+            Intent intent = new Intent(Dashboard.this, ProfileActivity.class);
+
+            Pair[] pairs =new Pair[1];
+            pairs[0] = new Pair<View, String>(profileImg,"profileImageTransition");
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Dashboard.this, pairs);
+
+            startActivity(intent, options.toBundle());
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
