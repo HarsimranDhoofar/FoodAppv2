@@ -77,12 +77,13 @@ public class Dashboard extends AppCompatActivity {
 
         if (id == R.id.profilebtn) {
             Intent intent = new Intent(Dashboard.this, ProfileActivity.class);
+//
+//            Pair[] pairs =new Pair[1];
+//            pairs[0] = new Pair<View, String>(profileImg,"profileImageTransition");
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Dashboard.this, pairs);
 
-            Pair[] pairs =new Pair[1];
-            pairs[0] = new Pair<View, String>(profileImg,"profileImageTransition");
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Dashboard.this, pairs);
-
-            startActivity(intent, options.toBundle());
+//            startActivity(intent, options.toBundle());
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
