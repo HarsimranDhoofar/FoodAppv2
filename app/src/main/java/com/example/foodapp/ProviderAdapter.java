@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHolder>{
+
     List<ProvidersClass> TvShowList;
     Context context;
 
@@ -53,6 +54,7 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
+
         ImageView imgTvShow;
         TextView textTvShow;
         CardView cv;
