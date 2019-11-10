@@ -9,11 +9,13 @@
         <item name="android:statusBarColor">@color/statusbar</item>
         <item name="android:windowActivityTransitions">true</item>
     </style>
+
     <style name="Widget.Food.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">?attr/colorAccent</item>
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

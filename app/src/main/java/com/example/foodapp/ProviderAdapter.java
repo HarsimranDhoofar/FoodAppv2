@@ -2,6 +2,7 @@ package com.example.foodapp;
 
 import android.content.Context;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,8 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHo
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"The position is:"+position,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), ProviderDescriptionActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
 
