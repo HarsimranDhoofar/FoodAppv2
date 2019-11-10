@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    View progressOverlay;
     private TextInputLayout usernameTextInput;
     private TextInputEditText mEmailField;
     private TextInputLayout passwordTextInput;
@@ -36,12 +38,13 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         mAuth = FirebaseAuth.getInstance();
-
         mEmailField = findViewById(R.id.txt_signIn_username);
         mPasswordField = findViewById(R.id.txt_signIn_password);
+        progressOverlay = findViewById(R.id.progress_overlay);
         signInbtn =findViewById(R.id.bt_signIn_signIn);//Don't need to type casting in android studio 3
         signInbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                AndroidUtils.animateView(progressOverlay, View.VISIBLE, 0.4f, 200);
                 signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
         });
@@ -55,6 +58,7 @@ public class SignInActivity extends AppCompatActivity {
     }
     private void signIn(String email, String password) {
        // Log.d(TAG, "signIn:" + email);
+
         if (!validateForm()) {
             return;
         }
@@ -70,12 +74,14 @@ public class SignInActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                         //    Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            AndroidUtils.animateView(progressOverlay, View.GONE, 0, 200);
                             Intent intent = new Intent(SignInActivity.this, Dashboard.class);
                             startActivity(intent);
                  //          updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
 //                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            AndroidUtils.animateView(progressOverlay, View.GONE, 0, 200);
                             Toast.makeText(SignInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         //    updateUI(null);

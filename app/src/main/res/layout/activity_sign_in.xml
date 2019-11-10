@@ -16,6 +16,7 @@
         android:orientation="vertical"
         android:padding="24dp"
         android:paddingTop="16dp">
+        <include layout="@layout/include_progress_overlay"/>
 
         <ImageView
             android:layout_width="64dp"
@@ -73,14 +74,16 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
+            <include layout="@layout/include_progress_overlay"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_signIn_signIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/button_signIn" />
+                android:text="@string/button_signIn">
+
+            </com.google.android.material.button.MaterialButton>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_button"
@@ -94,41 +97,6 @@
                 android:text="@string/button_newAccount" />
 
         </RelativeLayout>
-        <!--    <EditText-->
-        <!--        android:id="@+id/txt_signIn_username"-->
-        <!--        android:layout_width="257dp"-->
-        <!--        android:layout_height="45dp"-->
-        <!--        android:layout_marginStart="8dp"-->
-        <!--        android:layout_marginTop="40dp"-->
-        <!--        android:layout_marginEnd="8dp"-->
-        <!--        android:ems="10"-->
-        <!--        android:hint="User Name"-->
-        <!--        android:inputType="textEmailAddress"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toBottomOf="@+id/txt_signUp_logo" />-->
 
-        <!--    <EditText-->
-        <!--        android:id="@+id/txt_signIn_password"-->
-        <!--        android:layout_width="257dp"-->
-        <!--        android:layout_height="44dp"-->
-        <!--        android:layout_marginStart="8dp"-->
-        <!--        android:layout_marginTop="10dp"-->
-        <!--        android:layout_marginEnd="8dp"-->
-        <!--        android:ems="10"-->
-        <!--        android:hint="Password"-->
-        <!--        android:inputType="textPassword"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toBottomOf="@+id/txt_signIn_username" />-->
-
-        <!--    <Button-->
-        <!--        android:id="@+id/bt_signIn_signIn"-->
-        <!--        android:layout_width="308dp"-->
-        <!--        android:layout_height="74dp"-->
-        <!--        android:text="Sign In"-->
-        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent" />-->
     </LinearLayout>
 </ScrollView>
