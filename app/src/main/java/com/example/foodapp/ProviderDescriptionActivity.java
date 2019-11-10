@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,17 +20,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.ImageView;
 
 public class ProviderDescriptionActivity extends AppCompatActivity {
 
     ProvidersClass providersClass = new ProvidersClass();
     CollapsingToolbarLayout collapsingToolbar;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider_description);
 
         collapsingToolbar=  (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        imageView = (ImageView) findViewById(R.id.collapseImageView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FirebaseRetrive();
@@ -51,6 +55,10 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 collapsingToolbar.setTitle(dataSnapshot.child("p0").child("name").getValue().toString());
+                Picasso.get()
+                        .load(dataSnapshot.child("p0").child("img").getValue().toString())
+                        .fit().centerCrop()
+                        .into(imageView);
             }
 
             @Override
