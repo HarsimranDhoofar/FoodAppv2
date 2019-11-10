@@ -3,6 +3,7 @@ package com.example.foodapp;
 import android.content.Context;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,10 @@ import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
+
 
 import java.util.List;
 public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHolder>{
@@ -39,10 +43,17 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHo
         ProvidersClass tvShow = TvShowList.get(position);
 
         holder.textTvShow.setText(tvShow.getProvidername());
+        Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.BLACK)
+                .borderWidthDp(0)
+                .cornerRadiusDp(30)
+                .oval(false)
+                .build();
         Picasso.get()
                 .load(tvShow.getImgProvider())
-                .resize(50, 50)
+                .resize(70, 70)
                 .centerCrop()
+                .transform(transformation)
                 .into(holder.imgTvShow);
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
