@@ -44,13 +44,7 @@ public class Dashboard extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.clayout);
         profileImg = (ImageView) findViewById(R.id.profilebtn);
-//        mCoordinatorLayout.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//
-//            }
-//
-//        });
+
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,12 +71,6 @@ public class Dashboard extends AppCompatActivity {
 
         if (id == R.id.profilebtn) {
             Intent intent = new Intent(Dashboard.this, ProfileActivity.class);
-//
-//            Pair[] pairs =new Pair[1];
-//            pairs[0] = new Pair<View, String>(profileImg,"profileImageTransition");
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Dashboard.this, pairs);
-
-//            startActivity(intent, options.toBundle());
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
