@@ -3,7 +3,7 @@ package com.example.foodapp;
 public class ProvidersClass {
 
         private String Providername;
-        private int imgProvider;
+        private String imgProvider;
 
         public String getProvidername() {
             return Providername;
@@ -11,10 +11,10 @@ public class ProvidersClass {
         public void setProvidername(String providername) {
             Providername = providername;
         }
-        public int getImgProvider() {
+        public String getImgProvider() {
             return imgProvider;
         }
-        public void setImgProvider(int imgProvider) {
+        public void setImgProvider(String imgProvider) {
             this.imgProvider = imgProvider;
         }
 

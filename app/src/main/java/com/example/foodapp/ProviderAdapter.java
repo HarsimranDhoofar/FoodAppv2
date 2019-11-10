@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHolder>{
 
@@ -37,7 +39,11 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHo
         ProvidersClass tvShow = TvShowList.get(position);
 
         holder.textTvShow.setText(tvShow.getProvidername());
-        holder.imgTvShow.setImageResource(tvShow.getImgProvider());
+        Picasso.get()
+                .load(tvShow.getImgProvider())
+                .resize(50, 50)
+                .centerCrop()
+                .into(holder.imgTvShow);
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
