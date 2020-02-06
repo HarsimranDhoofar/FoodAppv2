@@ -33,6 +33,7 @@ public class SignInActivity extends AppCompatActivity {
   //  private EditText mEmailField;
  //   private EditText mPasswordField;
    private MaterialButton signInbtn;
+   private MaterialButton signUpbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,13 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AndroidUtils.animateView(progressOverlay, View.VISIBLE, 0.4f, 200);
                 signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            }
+        });
+        signUpbtn = findViewById(R.id.bt_signUp);
+        signUpbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivity(intent);
             }
         });
     }

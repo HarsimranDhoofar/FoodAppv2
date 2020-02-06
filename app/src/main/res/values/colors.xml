@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008080</color>
+    <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#DADCE0</color>
     <color name="colorAccent">#E0E0E0</color>
     <color name="toolbarIconColor">#FFFFFF</color>
-    <color name="loginPageBackgroundColor">#FFFFFF</color>
+    <color name="colorPageBackground">#FFFFFF</color>
     <color name="productGridBackgroundColor">#FFFFFF</color>
     <color name="background">#303030</color>
-    <color name="statusbar">#000000</color>
+    <color name="statusbar">#FFFFFF</color>
     <color name="cards_dilog">#424242</color>
     <color name="appbar">#212121</color>
 
