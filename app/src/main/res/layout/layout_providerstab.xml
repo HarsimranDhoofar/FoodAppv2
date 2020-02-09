@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background"
+    android:background="@color/colorPageBackground"
     android:elevation="1dp"
     android:orientation="vertical">
 
@@ -11,9 +11,9 @@
         android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cards_dilog"
+        android:background="@color/colorPageBackground"
         android:elevation="1dp"
-        app:cardBackgroundColor="@color/cards_dilog">
+        app:cardBackgroundColor="@color/colorPageBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 android:layout_margin="20dp"
                 android:elevation="1dp"
                 android:text="Place_holder"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/appbar"
                 android:textSize="17sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background">
+    android:background="@color/colorPageBackground">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/TvShows"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
+        android:background="@color/colorPageBackground"
         android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>

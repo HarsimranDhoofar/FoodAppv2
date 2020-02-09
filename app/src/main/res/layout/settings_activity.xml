@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
-    android:background="@color/background"
+    android:background="@color/colorPageBackground"
     android:orientation="vertical">
 
     <ImageView
@@ -13,17 +13,17 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="16dp"
-        android:background="@color/background"
-        android:backgroundTint="@color/background"
+        android:background="@color/colorPageBackground"
+        android:backgroundTint="@color/colorPageBackground"
+        android:contentDescription="TODO"
         android:transitionName="profileImageTransition"
-        app:srcCompat="@mipmap/profileimg"
-        android:contentDescription="TODO" />
+        app:srcCompat="@mipmap/profileimg" />
 
     <FrameLayout
         android:id="@+id/settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background">
+        android:background="@color/colorPageBackground">
 
     </FrameLayout>
 

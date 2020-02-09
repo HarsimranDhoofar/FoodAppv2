@@ -1,16 +1,24 @@
 package com.example.foodapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
+import android.app.FragmentManager;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,22 +28,43 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText mEmailField;
     private EditText mPasswordField;
-    private FloatingActionButton signUpbtn;
-
+    private MaterialButton signUpbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        } else {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            getWindow().setStatusBarColor(ContextCompat.getColor(SignUpActivity.this, R.color.appbar));
+        }
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.app_bar_signUp);
+        setSupportActionBar(myToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        myToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_black_18dp);
+//        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
         mAuth = FirebaseAuth.getInstance();
         mEmailField = findViewById(R.id.txt_signIn_username);
         mPasswordField = findViewById(R.id.txt_signIn_password);
-        signUpbtn = (FloatingActionButton) findViewById(R.id.fbt_signIn_signIn);//Don't need to type casting in android studio 3
+        signUpbtn = findViewById(R.id.fbt_signIn_signIn);//Don't need to type casting in android studio 3
 
         signUpbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
         });
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
     }
 
     @Override
