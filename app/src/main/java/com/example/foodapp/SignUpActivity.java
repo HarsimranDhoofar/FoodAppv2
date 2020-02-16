@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,15 +21,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private EditText mEmailField;
-    private EditText mPasswordField;
+    private TextInputEditText mFirstNameField;
+    private TextInputEditText mLastNameField;
+    private TextInputEditText mEmailField;
+    private TextInputEditText mDeliveryAddressField;
+    private TextInputEditText mPasswordField;
+    private TextInputEditText mCPasswordField;
     private MaterialButton signUpbtn;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +51,14 @@ public class SignUpActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        myToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_black_18dp);
-//        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+        progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
-        mEmailField = findViewById(R.id.txt_signIn_username);
-        mPasswordField = findViewById(R.id.txt_signIn_password);
+        mFirstNameField= findViewById(R.id.firstName_input_register);
+        mLastNameField= findViewById(R.id.lastName_input_register);
+        mEmailField = findViewById(R.id.email_input_register);
+        mDeliveryAddressField= findViewById(R.id.deliveryAddress_input_register);
+        mPasswordField = findViewById(R.id.password_input_register);
+        mCPasswordField = findViewById(R.id.cpassword_text_input_register);
         signUpbtn = findViewById(R.id.fbt_signIn_signIn);//Don't need to type casting in android studio 3
 
         signUpbtn.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +85,8 @@ public class SignUpActivity extends AppCompatActivity {
         if (!validateForm()) {
             return;
         }
+        progressDialog.setMessage("Creating New Account...");
+        progressDialog.show();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -88,7 +95,8 @@ public class SignUpActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                          //   Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
+                            progressDialog.dismiss();
+                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                         //    Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -123,25 +131,13 @@ public class SignUpActivity extends AppCompatActivity {
 
             return valid;
         }
-//    private void updateUI(FirebaseUser user) {
-//        hideProgressDialog();
-//        if (user != null) {
-//            mStatusTextView.setText(getString(R.string.emailpassword_status_fmt,
-//                    user.getEmail(), user.isEmailVerified()));
-//            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-//
-//            findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
-//            findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
-//            findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
-//
-//            findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
-//        } else {
-//            mStatusTextView.setText(R.string.signed_out);
-//            mDetailTextView.setText(null);
-//
-//            findViewById(R.id.emailPasswordButtons).setVisibility(View.VISIBLE);
-//            findViewById(R.id.emailPasswordFields).setVisibility(View.VISIBLE);
-//            findViewById(R.id.signedInButtons).setVisibility(View.GONE);
-//        }
-//    }
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            Intent intent = new Intent(SignUpActivity.this, Dashboard.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(SignUpActivity.this, "Cannot Create Account",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
     }
