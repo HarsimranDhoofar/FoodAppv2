@@ -11,6 +11,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
+        android:background="@color/colorPageBackground"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -19,17 +20,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="false"
-            app:title="FoodApp"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="FoodApp"
             app:toolbarId="@+id/toolbar">
+
             <ImageView
                 android:id="@+id/collapseImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.5"
-                app:srcCompat="@drawable/shr_logo"/>
+                app:srcCompat="@drawable/shr_logo" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

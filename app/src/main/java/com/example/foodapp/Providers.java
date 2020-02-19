@@ -6,23 +6,35 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.foodapp.ui.main.NewCustomer;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 //import com.google.firebase.database.DataSnapshot;
 //import com.google.firebase.database.DatabaseError;
 //import com.google.firebase.database.DatabaseReference;
 //import com.google.firebase.database.FirebaseDatabase;
 //import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -33,8 +45,9 @@ import java.util.ArrayList;
 
 public class Providers extends Fragment {
     RecyclerView recyclerView;
-    ProviderAdapter tvShowAdapter;
-    ArrayList<ProvidersClass> tvShows = new ArrayList<ProvidersClass>();
+    ProviderAdapter providerAdapter;
+    private FirebaseFirestore db;
+    ArrayList<ProvidersClass> providers = new ArrayList<ProvidersClass>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +57,56 @@ public class Providers extends Fragment {
     }
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
+
+        db = FirebaseFirestore.getInstance();
+        db.collection("Providers")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("", document.getId() + " => " + document.getData());
+                                ProvidersClass providersClass = document.toObject(ProvidersClass.class);
+                                ProvidersClass providersClass1 = new ProvidersClass();
+                                providersClass1.setAddress(providersClass.getAddress());
+                                providersClass1.setAvatarImage(providersClass.getAvatarImage());
+                                providersClass1.setServiceName(providersClass.getServiceName());
+                                providers.add(providersClass1);
+                                providerAdapter = new ProviderAdapter(providers);
+                                recyclerView = (RecyclerView) view.findViewById(R.id.TvShows);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                                recyclerView.setAdapter(providerAdapter);
+
+                                Log.d("", document.getId() + " => " + providersClass.getServiceName());
+                            }
+                        } else {
+                            Log.w("", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+//        DocumentReference docRef = db.collection("Providers").document(user.getUid());
+//        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable DocumentSnapshot snapshot,
+//                                @Nullable FirebaseFirestoreException e) {
+//                if (e != null) {
+//                    System.err.println("Listen failed: " + e);
+//                    return;
+//                }
+//
+//                if (snapshot != null && snapshot.exists()) {
+//                    System.out.println("Current data: " + snapshot.getData());
+//                    NewCustomer newCustomer= snapshot.toObject(NewCustomer.class);
+//                    userEmail_profile.setText(newCustomer.getEmail());
+//                    userName_profile.setText(newCustomer.getFirstName()+" "+newCustomer.getLastName());
+//                    userAddress_profile.setText(newCustomer.getDeliveryAddress());
+//                } else {
+//                    System.out.print("Current data: null");
+//                }
+//            }
+//        });
 //       FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 //       DatabaseReference mReference = mDatabase.getReference("provider");
 //

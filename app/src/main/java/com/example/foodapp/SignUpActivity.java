@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodapp.ui.main.NewCustomer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +60,10 @@ public class SignUpActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(SignUpActivity.this, R.color.appbar));
         }
         db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.app_bar_signUp);
         setSupportActionBar(myToolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -142,27 +148,13 @@ public class SignUpActivity extends AppCompatActivity {
             return valid;
         }
         private void insertCustomer(){
-            Log.e("insertCustomer", "insertCustomer: insert customer reached! " );
-            Map<String, Object> user = new HashMap<>();
-            user.put("first", "Ada");
-            user.put("last", "Lovelace");
-            user.put("born", 1815);
 
-// Add a new document with a generated ID
-            db.collection("users")
-                    .add(user)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d("add data", "DocumentSnapshot added with ID: " + documentReference.getId());
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w("no add data", "Error adding document", e);
-                        }
-                    });
+            NewCustomer newCustomer = new NewCustomer(mAuth.getCurrentUser().getUid(),"",mFirstNameField.getText().toString(),mLastNameField.getText().toString(),mEmailField.getText().toString(),mDeliveryAddressField.getText().toString());
+            db.collection("Customers").document(mAuth.getCurrentUser().getUid())
+                    .set(newCustomer);
+
+
+
         }
     private void updateUI(FirebaseUser user) {
         if (user != null) {

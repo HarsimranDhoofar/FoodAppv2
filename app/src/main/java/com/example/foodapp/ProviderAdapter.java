@@ -22,12 +22,12 @@ import com.squareup.picasso.Transformation;
 import java.util.List;
 public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHolder>{
 
-    List<ProvidersClass> TvShowList;
+    List<ProvidersClass> providerList;
     Context context;
 
-    public ProviderAdapter(List<ProvidersClass>TvShowList)
+    public ProviderAdapter(List<ProvidersClass> ProviderList)
     {
-        this.TvShowList = TvShowList;
+        this.providerList = ProviderList;
     }
 
     @Override
@@ -40,21 +40,22 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        ProvidersClass tvShow = TvShowList.get(position);
-
-        holder.textTvShow.setText(tvShow.getProvidername());
-        Transformation transformation = new RoundedTransformationBuilder()
-                .borderColor(Color.BLACK)
-                .borderWidthDp(0)
-                .cornerRadiusDp(30)
-                .oval(false)
-                .build();
-        Picasso.get()
-                .load(tvShow.getImgProvider())
-                .resize(70, 70)
-                .centerCrop()
-                .transform(transformation)
-                .into(holder.imgTvShow);
+        ProvidersClass providersClass = providerList.get(position);
+          holder.providerName.setText(providersClass.getServiceName());
+          holder.providerAddress.setText(providersClass.getAddress());
+//        holder.textTvShow.setText(tvShow.getProvidername());
+//        Transformation transformation = new RoundedTransformationBuilder()
+//                .borderColor(Color.BLACK)
+//                .borderWidthDp(0)
+//                .cornerRadiusDp(30)
+//                .oval(false)
+//                .build();
+//        Picasso.get()
+//                .load(tvShow.getImgProvider())
+//                .resize(70, 70)
+//                .centerCrop()
+//                .transform(transformation)
+//                .into(holder.imgTvShow);
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,21 +69,23 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return TvShowList.size();
+        return providerList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
 
-        ImageView imgTvShow;
-        TextView textTvShow;
+        ImageView providerImg;
+        TextView providerName;
+        TextView providerAddress;
         CardView cv;
 
         public ViewHolder(View itemView)
         {
             super(itemView);
-            imgTvShow = (ImageView)itemView.findViewById(R.id.imgTvshow);
-            textTvShow = (TextView)itemView.findViewById(R.id.textTvshow);
+            providerImg = (ImageView)itemView.findViewById(R.id.providerImg);
+            providerName = (TextView)itemView.findViewById(R.id.provider_name);
+            providerAddress=( TextView) itemView.findViewById(R.id.provider_address);
             cv = (CardView)itemView.findViewById(R.id.cv);
         }
 
