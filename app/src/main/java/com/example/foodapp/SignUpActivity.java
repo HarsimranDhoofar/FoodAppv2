@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,9 +29,15 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private TextInputEditText mFirstNameField;
     private TextInputEditText mLastNameField;
     private TextInputEditText mEmailField;
@@ -49,6 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(ContextCompat.getColor(SignUpActivity.this, R.color.appbar));
         }
+        db = FirebaseFirestore.getInstance();
         Toolbar myToolbar = (Toolbar) findViewById(R.id.app_bar_signUp);
         setSupportActionBar(myToolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -98,6 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                              Log.d("NewAccountCreationS", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            insertCustomer();
                             progressDialog.dismiss();
                             updateUI(user);
                         } else {
@@ -130,6 +140,29 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             return valid;
+        }
+        private void insertCustomer(){
+            Log.e("insertCustomer", "insertCustomer: insert customer reached! " );
+            Map<String, Object> user = new HashMap<>();
+            user.put("first", "Ada");
+            user.put("last", "Lovelace");
+            user.put("born", 1815);
+
+// Add a new document with a generated ID
+            db.collection("users")
+                    .add(user)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d("add data", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("no add data", "Error adding document", e);
+                        }
+                    });
         }
     private void updateUI(FirebaseUser user) {
         if (user != null) {

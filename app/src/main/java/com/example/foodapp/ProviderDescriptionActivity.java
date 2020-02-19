@@ -5,11 +5,11 @@ import android.os.Bundle;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+//import com.google.firebase.database.DataSnapshot;
+//import com.google.firebase.database.DatabaseError;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -36,7 +36,7 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.collapseImageView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FirebaseRetrive();
+      //  FirebaseRetrive();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,25 +46,25 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
             }
         });
     }
-    public void FirebaseRetrive(){
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mReference = mDatabase.getReference("provider");
-
-
-        mReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                collapsingToolbar.setTitle(dataSnapshot.child("p0").child("name").getValue().toString());
-                Picasso.get()
-                        .load(dataSnapshot.child("p0").child("img").getValue().toString())
-                        .fit().centerCrop()
-                        .into(imageView);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//    public void FirebaseRetrive(){
+//        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+//        DatabaseReference mReference = mDatabase.getReference("provider");
+//
+//
+//        mReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                collapsingToolbar.setTitle(dataSnapshot.child("p0").child("name").getValue().toString());
+//                Picasso.get()
+//                        .load(dataSnapshot.child("p0").child("img").getValue().toString())
+//                        .fit().centerCrop()
+//                        .into(imageView);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
     }
-}
+
