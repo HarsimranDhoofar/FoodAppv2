@@ -12,9 +12,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputEditText mDeliveryAddressField;
     private TextInputEditText mPasswordField;
     private TextInputEditText mCPasswordField;
+    private TextView validation_text;
     private MaterialButton signUpbtn;
     private ProgressDialog progressDialog;
     @Override
@@ -59,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
         mDeliveryAddressField= findViewById(R.id.deliveryAddress_input_register);
         mPasswordField = findViewById(R.id.password_input_register);
         mCPasswordField = findViewById(R.id.cpassword_text_input_register);
+        validation_text= findViewById(R.id.validation_alert_textView);
         signUpbtn = findViewById(R.id.fbt_signIn_signIn);//Don't need to type casting in android studio 3
 
         signUpbtn.setOnClickListener(new View.OnClickListener() {
@@ -77,11 +81,10 @@ public class SignUpActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //  updateUI(currentUser);
+       //  updateUI(currentUser);
     }
 
     private void createAccount(String email, String password) {
-        //Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
         }
@@ -93,19 +96,16 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                         //   Log.d(TAG, "createUserWithEmail:success");
+                             Log.d("NewAccountCreationS", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             progressDialog.dismiss();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                        //    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        //    updateUI(null);
+                             Log.w("NewAccountCreationF", "createUserWithEmail:failure", task.getException());
+                            validation_text.setText("Account not Created: "+task.getException());
+                            updateUI(null);
                         }
-
-                        // ...
                     }
                 });
     }
@@ -133,11 +133,11 @@ public class SignUpActivity extends AppCompatActivity {
         }
     private void updateUI(FirebaseUser user) {
         if (user != null) {
+            finish();
             Intent intent = new Intent(SignUpActivity.this, Dashboard.class);
             startActivity(intent);
         } else {
-            Toast.makeText(SignUpActivity.this, "Cannot Create Account",
-                    Toast.LENGTH_SHORT).show();
+           validation_text.setVisibility(View.VISIBLE);
         }
     }
     }

@@ -1,5 +1,6 @@
 package com.example.foodapp;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
@@ -29,7 +30,7 @@ public class Dashboard extends AppCompatActivity {
 
     private CoordinatorLayout mCoordinatorLayout;
     private ImageView profileImg;
-
+    public static Activity fa;
 
 
     @Override
@@ -42,6 +43,7 @@ public class Dashboard extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(ContextCompat.getColor(Dashboard.this, R.color.appbar));
         }
+        fa = this;
        // SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         //viewPager.setAdapter(sectionsPagerAdapter);

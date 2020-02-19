@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,15 +29,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    View progressOverlay;
-    private TextInputLayout usernameTextInput;
     private TextInputEditText mEmailField;
-    private TextInputLayout passwordTextInput;
     private TextInputEditText mPasswordField;
-  //  private EditText mEmailField;
- //   private EditText mPasswordField;
-   private MaterialButton signInbtn;
-   private MaterialButton signUpbtn;
+    private MaterialButton signInbtn;
+    private MaterialButton signUpbtn;
+    private ProgressDialog progressDialog;
+    private TextView signIn_alert;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +48,12 @@ public class SignInActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mEmailField = findViewById(R.id.txt_signIn_username);
         mPasswordField = findViewById(R.id.txt_signIn_password);
-        progressOverlay = findViewById(R.id.progress_overlay);
+        progressDialog = new ProgressDialog(this);
+        signIn_alert = findViewById(R.id.validation_alert_textView_signIn);
         signInbtn =findViewById(R.id.bt_signIn_signIn);//Don't need to type casting in android studio 3
         signInbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                AndroidUtils.animateView(progressOverlay, View.VISIBLE, 0.4f, 200);
+
                 signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
         });
@@ -80,7 +80,8 @@ public class SignInActivity extends AppCompatActivity {
         }
 
       //  showProgressDialog();
-
+         progressDialog.setMessage("Signing in...");
+         progressDialog.show();
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -90,28 +91,19 @@ public class SignInActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                         //    Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            AndroidUtils.animateView(progressOverlay, View.GONE, 0, 200);
-                            Intent intent = new Intent(SignInActivity.this, Dashboard.class);
-                            startActivity(intent);
-                 //          updateUI(user);
+                            updateUI(user);
                         } else {
+                            signIn_alert.setText(task.getException().getMessage());
                             // If sign in fails, display a message to the user.
 //                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            AndroidUtils.animateView(progressOverlay, View.GONE, 0, 200);
-                            Toast.makeText(SignInActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        //    updateUI(null);
+                            updateUI(null);
                         }
-
-                        // [START_EXCLUDE]
                         if (!task.isSuccessful()) {
-                        //    mStatusTextView.setText(R.string.auth_failed);
+                            signIn_alert.setText(task.getException().getMessage());
+                            updateUI(null);
                         }
-                   //     hideProgressDialog();
-                        // [END_EXCLUDE]
                     }
                 });
-        // [END sign_in_with_email]
     }
     private boolean validateForm () {
         boolean valid = true;
@@ -134,13 +126,14 @@ public class SignInActivity extends AppCompatActivity {
 
         return valid;
     }
-//    private void updateUI(FirebaseUser user) {
-//       // hideProgressDialog();
-//        if (user != null) {
-//            Intent intent = new Intent(SignInActivity.this, Dashboard.class);
-//            startActivity(intent);
-//        } else {
-//
-//        }
-//    }
+    private void updateUI(FirebaseUser user) {
+        progressDialog.dismiss();
+        if (user != null) {
+            finish();
+            Intent intent = new Intent(SignInActivity.this, Dashboard.class);
+                            startActivity(intent);
+        } else {
+            signIn_alert.setVisibility(View.VISIBLE);
+        }
+    }
 }

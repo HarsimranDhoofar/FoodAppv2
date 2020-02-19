@@ -6,26 +6,102 @@
     android:background="@color/colorPageBackground"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/profileimg_setting"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/colorPageBackground"
-        android:backgroundTint="@color/colorPageBackground"
-        android:contentDescription="TODO"
-        android:transitionName="profileImageTransition"
-        app:srcCompat="@mipmap/profileimg" />
-
-    <FrameLayout
-        android:id="@+id/settings"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPageBackground">
+        android:background="@color/colorPageBackground"
+        android:elevation="1dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    </FrameLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/app_bar_signUp"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/baseline_arrow_back_black_18dp"
+        app:title="PROFILE"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Small"
+        app:titleTextColor="@color/appbar">
 
+    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/profileimg_setting"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/colorPageBackground"
+            android:backgroundTint="@color/colorPageBackground"
+            android:transitionName="profileImageTransition"
+            app:srcCompat="@mipmap/profileimg" />
+
+        <TextView
+            android:id="@+id/userName_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@id/profileimg_setting"
+            android:text="Harsimran Dhoofar"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+        <TextView
+        android:id="@+id/userEmail_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/profileimg_setting"
+        android:layout_below="@id/userName_profile"
+        android:text="sam.dhoofar@gmail.com"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="14sp"
+         />
+        <TextView
+            android:id="@+id/userAddress_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/profileimg_setting"
+            android:layout_below="@id/userEmail_profile"
+            android:text="8 BerryField Way, Brampton"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/listview_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profileimg_setting"
+            android:clickable="true"></ListView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/listview_profile"
+            android:padding="24dp"
+            android:paddingTop="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logout_btn_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Log Out"
+                android:textColorLink="@android:color/holo_red_dark"
+                app:backgroundTint="@android:color/holo_red_dark"
+                app:icon="@drawable/sign_out"
+                app:iconGravity="textStart"
+                app:iconSize="30dp"></com.google.android.material.button.MaterialButton>
+    </RelativeLayout>
+    </RelativeLayout>
 
 </LinearLayout>

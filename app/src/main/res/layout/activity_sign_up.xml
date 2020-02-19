@@ -21,6 +21,18 @@
             app:title="CREATE NEW ACCOUNT"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Small"
             app:titleTextColor="@color/appbar"></androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/validation_alert_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_red_dark"
+            android:text="Account not created - error"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/colorPageBackground"
+            android:textStyle="bold"
+            android:visibility="gone" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
