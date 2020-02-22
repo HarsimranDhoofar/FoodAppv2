@@ -69,6 +69,7 @@ public class Providers extends Fragment {
                                 Log.d("", document.getId() + " => " + document.getData());
                                 ProvidersClass providersClass = document.toObject(ProvidersClass.class);
                                 ProvidersClass providersClass1 = new ProvidersClass();
+                                providersClass1.setUid(providersClass.getUid());
                                 providersClass1.setAddress(providersClass.getAddress());
                                 providersClass1.setAvatarImage(providersClass.getAvatarImage());
                                 providersClass1.setServiceName(providersClass.getServiceName());
