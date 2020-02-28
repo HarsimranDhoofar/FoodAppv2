@@ -20,8 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="false"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="@color/colorPageBackground"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleTextAppearance="@style/CollapsedAppBar"
+            app:collapsedTitleTextAppearance="@style/CollapsedAppBar"
             app:title="FoodApp"
             app:toolbarId="@+id/toolbar">
 
@@ -38,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/baseline_arrow_back_black_18dp"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
             </androidx.appcompat.widget.Toolbar>

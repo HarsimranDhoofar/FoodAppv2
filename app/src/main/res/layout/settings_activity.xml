@@ -26,6 +26,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
+        android:id="@+id/profileView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView

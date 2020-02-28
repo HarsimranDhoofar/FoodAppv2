@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +18,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.foodapp.ui.main.NewCustomer;
@@ -83,6 +87,25 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
 
         listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position ==0){
+                    Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                    startActivity(intent);
+                }
+                if(position ==1){
+                    Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                    startActivity(intent);
+                }
+                if(position ==2){
+                    Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+        });
     }
     public boolean onOptionsItemSelected(MenuItem item){
         finish();
@@ -120,5 +143,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             Dashboard.fa.finish();
             startActivity(new Intent(this, SignInActivity.class));
         }
+
     }
+
 }

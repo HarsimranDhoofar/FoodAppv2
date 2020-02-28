@@ -1,6 +1,8 @@
 package com.example.foodapp;
 
-public class ProvidersClass {
+import java.io.Serializable;
+
+public class ProvidersClass implements Serializable {
 
         private String address;
         private String avatarImage;
