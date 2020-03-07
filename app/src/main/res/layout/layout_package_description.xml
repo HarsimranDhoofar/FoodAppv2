@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPageBackground"
+    android:elevation="1dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:minHeight="200dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/providerImg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPageBackground"
+                android:backgroundTint="@color/colorPageBackground"
+                android:transitionName="profileImageTransition"
+                app:srcCompat="@mipmap/profileimg" />
+
+            <TextView
+                android:id="@+id/provider_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@id/providerImg"
+                android:text="Small Package "
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/package_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/provider_name"
+                android:layout_toRightOf="@id/providerImg"
+                android:text=" $200"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/monday_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/providerImg"
+                android:layout="@id/providerImg"
+                android:text="Monday"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/monday_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/monday_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="description" />
+            <TextView
+                android:id="@+id/tuesday_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/monday_description"
+                android:layout="@id/providerImg"
+                android:text="Tuesday"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tuesday_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/tuesday_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="description" />
+            <TextView
+                android:id="@+id/wednesday_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/tuesday_description"
+                android:layout="@id/providerImg"
+                android:text="Wednesday"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/wednesday_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/wednesday_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="description" />
+            <TextView
+                android:id="@+id/thursday_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/wednesday_description"
+                android:layout="@id/providerImg"
+                android:text="Thursday"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/thursday_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/thursday_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="description" />
+            <TextView
+                android:id="@+id/friday_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/thursday_description"
+                android:layout="@id/providerImg"
+                android:text="Friday"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/friday_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/friday_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="description" />
+            <TextView
+                android:id="@+id/saturday_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/friday_description"
+                android:layout="@id/providerImg"
+                android:text="Saturday"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/saturday_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/saturday_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="description" />
+            <TextView
+                android:id="@+id/sunday_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/saturday_description"
+                android:layout="@id/providerImg"
+                android:text="Sunday"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/sunday_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/sunday_header"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="description" />
+    </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
