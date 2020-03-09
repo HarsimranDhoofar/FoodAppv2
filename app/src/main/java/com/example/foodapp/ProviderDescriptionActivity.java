@@ -1,5 +1,6 @@
 package com.example.foodapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,10 +49,13 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
     ProvidersClass providersClass;
     CollapsingToolbarLayout collapsingToolbar;
     ImageView imageView;
-    FirebaseFirestore db;
     ArrayList<String> uId=new ArrayList<String>();
     String postion;
-
+    Context context;
+    RecyclerView recyclerView;
+    ProviderDescriptionAdapter providerDescriptionAdapter;
+    private FirebaseFirestore db;
+    ArrayList<ProviderDescriptionClass> providerDescription = new ArrayList<ProviderDescriptionClass>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent in = new Intent();
+        context =this;
         providersClass= (ProvidersClass) getIntent().getSerializableExtra("KEY_EVENT");
         System.out.println(providersClass.getUid());
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
@@ -77,7 +82,7 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    //    FirebaseRetrive();
+        FirebaseRetrive();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,52 +96,40 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
         finish();
         return true;
     }
-//    public void FirebaseRetrive() {
-//        System.out.println("In FirebaseRetrive");
-//
-//        db.collection("Providers")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Log.d("", document.getId() + " => " + document.getData());
-//                                ProvidersClass providersClass = document.toObject(ProvidersClass.class);
-//                                providersClass1.setUid(providersClass.getUid());
-//                                System.out.println("inside 1st one");
-//                                uId.add(document.getId());
-//
-//                                DocumentReference docRef = db.collection("Providers").document(uId);
-//                                    docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-//                                    @Override
-//                                       public void onEvent(@Nullable DocumentSnapshot snapshot,
-//                                       @Nullable FirebaseFirestoreException e) {
-//                                       if (e != null) {
-//                                       System.err.println("Listen failed: " + e);
-//                                       return;
-//                            }
-//
-//                            if (snapshot != null && snapshot.exists()) {
-//                                 System.out.println("Current data: " + snapshot.getData());
-//                                 Log.e("selected:", providersClass1.getUid());
-//                                 NewCustomer newCustomer = snapshot.toObject(NewCustomer.class);
-////                               userEmail_profile.setText(newCustomer.getEmail());
-////                               userName_profile.setText(newCustomer.getFirstName()+" "+newCustomer.getLastName());
-////                               userAddress_profile.setText(newCustomer.getDeliveryAddress());
-//                            } else {
-//                                 System.out.print("Current data: null");
-//                            }
-//                        }
-//                    });
-//                                System.out.println(uId);
-//                            }
-//                        } else {
-//                            System.out.println("inside 2st one");
-//                            Log.w("", "Error getting documents.", task.getException());
-//                        }
-//                    }
-//                });
-//
-//    }
+    public void FirebaseRetrive() {
+        db = FirebaseFirestore.getInstance();
+        db.collection("Providers").document(providersClass.getUid()).collection("mealPackage")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                           //     Log.d("", document.getId() + " => " + document.getData());
+                                ProviderDescriptionClass providerDescriptionClass = document.toObject(ProviderDescriptionClass.class);
+                                ProviderDescriptionClass providerDescriptionClass1 = new ProviderDescriptionClass();
+                                providerDescriptionClass1.setPackageName(providerDescriptionClass.getPackageName());
+                                providerDescriptionClass1.setMonday(providerDescriptionClass.getMonday());
+                                providerDescriptionClass1.setTuesday(providerDescriptionClass.getTuesday());
+                                providerDescriptionClass1.setWednesday(providerDescriptionClass.getWednesday());
+                                providerDescriptionClass1.setThursday(providerDescriptionClass.getThursday());
+                                providerDescriptionClass1.setFriday(providerDescriptionClass.getFriday());
+                                providerDescriptionClass1.setSaturday(providerDescriptionClass.getSaturday());
+                                providerDescriptionClass1.setSunday(providerDescriptionClass.getSunday());
+                                providerDescription.add(providerDescriptionClass1);
+                                providerDescriptionAdapter = new ProviderDescriptionAdapter(providerDescription);
+                                recyclerView = (RecyclerView) findViewById(R.id.mealPackageContent);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                                recyclerView.setAdapter(providerDescriptionAdapter);
+
+                             //   Log.d("", document.getId() + " => " + providersClass.getServiceName());
+                            }
+                        } else {
+                            Log.w("", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+    }
 }
