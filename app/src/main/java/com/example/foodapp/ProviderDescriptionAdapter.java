@@ -51,10 +51,10 @@ public class ProviderDescriptionAdapter  extends RecyclerView.Adapter<ProviderDe
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-//                Intent i = new Intent(context, ProviderDescriptionActivity.class);
+                Intent i = new Intent(context, PaymentActivity.class);
 //                ProvidersClass eventInfo = providerList.get(position);
 //                i.putExtra("KEY_EVENT", eventInfo); // passing the clicked event details as intent-extra
-//                context.startActivity(i);
+                context.startActivity(i);
             }
         });
     }
