@@ -13,18 +13,23 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPageBackground"
         android:elevation="1dp"
+        android:isScrollContainer="false"
+        android:outlineProvider="none"
+        android:overScrollMode="always"
+        android:stateListAnimator="@anim/fui_slide_in_right"
         app:cardBackgroundColor="@color/colorPageBackground">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/providerImg"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/colorPageBackground"
                 android:backgroundTint="@color/colorPageBackground"
@@ -43,14 +48,15 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textSize="19sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/provider_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/provider_name"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/providerImg"
-                android:layout_below="@id/provider_name"
                 android:text="8 BerryField Way, Brampton"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textSize="15sp"

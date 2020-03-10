@@ -55,6 +55,11 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/packageImg"
+                android:background="@android:color/darker_gray" />
             <TextView
                 android:id="@+id/monday_header"
                 android:layout_width="wrap_content"
@@ -76,7 +81,14 @@
                 android:layout_marginLeft="20dp"
                 android:text="description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/monday_description"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/darker_gray" />
             <TextView
                 android:id="@+id/tuesday_header"
                 android:layout_width="wrap_content"
@@ -98,7 +110,14 @@
                 android:layout_marginLeft="20dp"
                 android:text="description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tuesday_description"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/darker_gray" />
             <TextView
                 android:id="@+id/wednesday_header"
                 android:layout_width="wrap_content"
@@ -120,7 +139,14 @@
                 android:layout_marginLeft="20dp"
                 android:text="description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/wednesday_description"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/darker_gray" />
             <TextView
                 android:id="@+id/thursday_header"
                 android:layout_width="wrap_content"
@@ -142,7 +168,14 @@
                 android:layout_marginLeft="20dp"
                 android:text="description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/thursday_description"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/darker_gray" />
             <TextView
                 android:id="@+id/friday_header"
                 android:layout_width="wrap_content"
@@ -164,7 +197,14 @@
                 android:layout_marginLeft="20dp"
                 android:text="description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/friday_description"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/darker_gray" />
             <TextView
                 android:id="@+id/saturday_header"
                 android:layout_width="wrap_content"
@@ -186,7 +226,14 @@
                 android:layout_marginLeft="20dp"
                 android:text="description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/saturday_description"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/darker_gray" />
             <TextView
                 android:id="@+id/sunday_header"
                 android:layout_width="wrap_content"

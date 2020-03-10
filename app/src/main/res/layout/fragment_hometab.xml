@@ -3,12 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Home">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="THis is home tab" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view_home"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/empty_home" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/animation_view_home"
+            android:text="It look like you do not have any provider at the moment. Please click on the Providers tab or Swipe Right to browse through our delicious food. Enjoy!"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="15dp"
+            android:textStyle="bold"></TextView>
+    </RelativeLayout>
 
 </FrameLayout>
