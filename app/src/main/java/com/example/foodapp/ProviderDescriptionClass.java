@@ -9,11 +9,20 @@ public class ProviderDescriptionClass {
     private String saturday;
     private String sunday;
     private String packageName;
+    private String packageImg;
 
     public ProviderDescriptionClass() {
     }
 
-    public ProviderDescriptionClass(String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday, String packageName) {
+    public String getPackageImg() {
+        return packageImg;
+    }
+
+    public void setPackageImg(String packageImg) {
+        this.packageImg = packageImg;
+    }
+
+    public ProviderDescriptionClass(String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday, String packageName, String packageImg) {
         this.monday = monday;
         this.tuesday = tuesday;
         this.wednesday = wednesday;
@@ -22,6 +31,7 @@ public class ProviderDescriptionClass {
         this.saturday = saturday;
         this.sunday = sunday;
         this.packageName = packageName;
+        this.packageImg = packageImg;
     }
 
     public String getMonday() {

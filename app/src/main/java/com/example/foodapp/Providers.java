@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -78,6 +79,7 @@ public class Providers extends Fragment {
                                 providers.add(providersClass1);
                                 providerAdapter = new ProviderAdapter(providers);
                                 recyclerView = (RecyclerView) view.findViewById(R.id.TvShows);
+                                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                                 recyclerView.setAdapter(providerAdapter);

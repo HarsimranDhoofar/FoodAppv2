@@ -113,6 +113,7 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
                            //     Log.d("", document.getId() + " => " + document.getData());
                                 ProviderDescriptionClass providerDescriptionClass = document.toObject(ProviderDescriptionClass.class);
                                 ProviderDescriptionClass providerDescriptionClass1 = new ProviderDescriptionClass();
+                                providerDescriptionClass1.setPackageImg(providerDescriptionClass.getPackageImg());
                                 providerDescriptionClass1.setPackageName(providerDescriptionClass.getPackageName());
                                 providerDescriptionClass1.setMonday(providerDescriptionClass.getMonday());
                                 providerDescriptionClass1.setTuesday(providerDescriptionClass.getTuesday());
