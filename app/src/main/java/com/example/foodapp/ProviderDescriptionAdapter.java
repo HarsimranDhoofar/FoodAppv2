@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,7 +49,7 @@ public class ProviderDescriptionAdapter  extends RecyclerView.Adapter<ProviderDe
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                Intent i = new Intent(context, PaymentActivity.class);
+                Intent i = new Intent(context, PaypalPaymentActivity.class);
 //                ProvidersClass eventInfo = providerList.get(position);
 //                i.putExtra("KEY_EVENT", eventInfo); // passing the clicked event details as intent-extra
                 context.startActivity(i);

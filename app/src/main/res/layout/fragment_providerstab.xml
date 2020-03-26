@@ -6,12 +6,22 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPageBackground">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:progressBarStyle"
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/TvShows"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPageBackground"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical"
+        android:visibility="gone">
 
     </androidx.recyclerview.widget.RecyclerView>
 

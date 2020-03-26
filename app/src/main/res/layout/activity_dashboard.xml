@@ -36,6 +36,7 @@
             app:tabBackground="@color/colorPageBackground"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabTextColor="@color/colorPrimary" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

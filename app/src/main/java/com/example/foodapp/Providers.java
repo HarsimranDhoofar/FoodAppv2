@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.example.foodapp.ui.main.NewCustomer;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,6 +49,7 @@ public class Providers extends Fragment {
     ProviderAdapter providerAdapter;
     private FirebaseFirestore db;
     ArrayList<ProvidersClass> providers = new ArrayList<ProvidersClass>();
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +59,7 @@ public class Providers extends Fragment {
     }
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-
+        progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         db = FirebaseFirestore.getInstance();
         db.collection("Providers")
                 .get()
@@ -79,7 +81,8 @@ public class Providers extends Fragment {
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                                 recyclerView.setAdapter(providerAdapter);
-
+                                recyclerView.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
                                 Log.d("", document.getId() + " => " + providersClass.getServiceName());
                             }
                         } else {
