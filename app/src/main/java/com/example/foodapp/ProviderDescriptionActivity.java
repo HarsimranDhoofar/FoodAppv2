@@ -36,6 +36,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,7 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
     ProvidersClass providersClass;
     CollapsingToolbarLayout collapsingToolbar;
     ImageView imageView;
+    String providerUid;
     ArrayList<String> uId=new ArrayList<String>();
     String postion;
     Context context;
@@ -59,7 +62,7 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
     ProviderDescriptionAdapter providerDescriptionAdapter;
     private FirebaseFirestore db;
     ArrayList<ProviderDescriptionClass> providerDescription = new ArrayList<ProviderDescriptionClass>();
-
+   ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +82,7 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
         context =this;
         providersClass= (ProvidersClass) getIntent().getSerializableExtra("KEY_EVENT");
         System.out.println(providersClass.getUid());
+        providerUid = providersClass.getUid();
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         imageView = (ImageView) findViewById(R.id.collapseImageView);
         collapsingToolbar.setTitle(providersClass.getServiceName());
@@ -114,6 +118,7 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
                                 ProviderDescriptionClass providerDescriptionClass = document.toObject(ProviderDescriptionClass.class);
                                 ProviderDescriptionClass providerDescriptionClass1 = new ProviderDescriptionClass();
                                 providerDescriptionClass1.setPackageImg(providerDescriptionClass.getPackageImg());
+                                providerDescriptionClass1.setPrice(providerDescriptionClass.getPrice());
                                 providerDescriptionClass1.setPackageName(providerDescriptionClass.getPackageName());
                                 providerDescriptionClass1.setMonday(providerDescriptionClass.getMonday());
                                 providerDescriptionClass1.setTuesday(providerDescriptionClass.getTuesday());
@@ -125,9 +130,12 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
                                 providerDescription.add(providerDescriptionClass1);
                                 providerDescriptionAdapter = new ProviderDescriptionAdapter(providerDescription);
                                 recyclerView = (RecyclerView) findViewById(R.id.mealPackageContent);
+                                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
                                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
                                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                                 recyclerView.setAdapter(providerDescriptionAdapter);
+                                recyclerView.setVisibility(View.VISIBLE);
+
 
                              //   Log.d("", document.getId() + " => " + providersClass.getServiceName());
                             }

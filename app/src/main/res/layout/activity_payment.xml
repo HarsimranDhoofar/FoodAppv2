@@ -53,92 +53,28 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animation_view"
+                android:layout_width="match_parent"
+                android:layout_height="178dp"
                 android:layout_marginTop="32dp"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
                 android:scaleType="centerCrop"
-                app:lottie_rawRes="@raw/creditcard_lottie"
+                app:lottie_autoPlay="true"
                 app:lottie_loop="false"
-                app:lottie_autoPlay="true" />
+                app:lottie_rawRes="@raw/creditcard_lottie" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cardHolderName"
-                android:layout_marginTop="20dp"
+
+            <TextView
+                android:id="@+id/providername_pay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="1dp"
-                android:hint="Card Holder Name"
-                android:textColorHint="@color/colorPrimary">
+                android:text="Package Name :"
+                android:textSize="24sp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cardHolderName_payment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cardNumber"
+            <TextView
+                android:id="@+id/providerprice_pay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="1dp"
-                android:hint="Card Number"
-                android:textColorHint="@color/colorPrimary">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cardNumber_payment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/exp_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="1dp"
-                android:hint="Exp Date"
-                android:textColorHint="@color/colorPrimary">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/exp_date_payment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cvv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="1dp"
-                android:hint="CVV"
-                android:textColorHint="@color/colorPrimary">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cvv_payment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/postal_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="1dp"
-                android:hint="Postal Code"
-                android:textColorHint="@color/colorPrimary">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/postal_code_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
+                android:text="TextView"
+                android:textSize="15sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

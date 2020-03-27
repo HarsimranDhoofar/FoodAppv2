@@ -3,6 +3,7 @@ package com.example.foodapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -25,6 +26,7 @@ public class ProviderDescriptionAdapter  extends RecyclerView.Adapter<ProviderDe
     List<ProviderDescriptionClass> providerDescriptionList;
     Context context;
     ArrayList<String> uId=new ArrayList<String>();
+    int classpostion;
 
     public ProviderDescriptionAdapter(ArrayList<ProviderDescriptionClass> providerDescription) {
         this.providerDescriptionList = providerDescription;
@@ -39,8 +41,9 @@ public class ProviderDescriptionAdapter  extends RecyclerView.Adapter<ProviderDe
     }
 
     @Override
-    public void onBindViewHolder(ProviderDescriptionAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ProviderDescriptionAdapter.ViewHolder holder, final int position) {
         ProviderDescriptionClass providerDescriptionClass = providerDescriptionList.get(position);
+        this.classpostion = position;
         Transformation transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.BLACK)
                 .borderWidthDp(0)
@@ -49,10 +52,12 @@ public class ProviderDescriptionAdapter  extends RecyclerView.Adapter<ProviderDe
                 .build();
         Picasso.get()
                 .load(providerDescriptionClass.getPackageImg())
-                .fit().centerCrop()
+                .resize(70, 70)
+                .centerCrop()
+                .transform(transformation)
                 .into(holder.packageImg);
         holder.packageName.setText(providerDescriptionClass.getPackageName());
-        holder.packagePrice.setText("$ 200");
+        holder.packagePrice.setText("$ "+providerDescriptionClass.getPrice());
         holder.mondayDescription.setText(providerDescriptionClass.getMonday());
         holder.tuesdayDescription.setText(providerDescriptionClass.getTuesday());
         holder.wednesdayDescription.setText(providerDescriptionClass.getWednesday());
@@ -64,8 +69,17 @@ public class ProviderDescriptionAdapter  extends RecyclerView.Adapter<ProviderDe
             @Override
             public void onClick(final View view) {
                 Intent i = new Intent(context, PaypalPaymentActivity.class);
-//                ProvidersClass eventInfo = providerList.get(position);
-//                i.putExtra("KEY_EVENT", eventInfo); // passing the clicked event details as intent-extra
+                ProviderDescriptionClass eventInfo = providerDescriptionList.get(position);
+                i.putExtra("PROVIDER_NAME",eventInfo.getPackageName());
+                i.putExtra("PACKAGE_PRICE",eventInfo.getPrice());
+                i.putExtra("PACKAGE_IMAGE",eventInfo.getPackageImg());
+                i.putExtra("MONDAY",eventInfo.getMonday());
+                i.putExtra("TUESDAY",eventInfo.getTuesday());
+                i.putExtra("WEDNESDAY",eventInfo.getWednesday());
+                i.putExtra("THURSDAY",eventInfo.getThursday());
+                i.putExtra("FRIDAY",eventInfo.getFriday());
+                i.putExtra("SATURDAY",eventInfo.getSaturday());
+                i.putExtra("SUNDAY",eventInfo.getSunday());
                 context.startActivity(i);
             }
         });

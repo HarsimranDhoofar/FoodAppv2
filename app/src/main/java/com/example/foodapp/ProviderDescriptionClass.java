@@ -10,6 +10,15 @@ public class ProviderDescriptionClass {
     private String sunday;
     private String packageName;
     private String packageImg;
+    private String price;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public ProviderDescriptionClass() {
     }
@@ -22,7 +31,7 @@ public class ProviderDescriptionClass {
         this.packageImg = packageImg;
     }
 
-    public ProviderDescriptionClass(String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday, String packageName, String packageImg) {
+    public ProviderDescriptionClass(String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday, String packageName, String packageImg, String price) {
         this.monday = monday;
         this.tuesday = tuesday;
         this.wednesday = wednesday;
@@ -32,6 +41,7 @@ public class ProviderDescriptionClass {
         this.sunday = sunday;
         this.packageName = packageName;
         this.packageImg = packageImg;
+        this.price =price;
     }
 
     public String getMonday() {
