@@ -12,6 +12,7 @@ public class ProviderDescriptionClass {
     private String packageImg;
     private String price;
 
+
     public String getPrice() {
         return price;
     }

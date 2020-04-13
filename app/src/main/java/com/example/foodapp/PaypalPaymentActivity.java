@@ -7,7 +7,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodapp.ui.main.CustomerSubscribed;
 import com.example.foodapp.ui.main.NewCustomer;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -39,6 +42,7 @@ import java.math.BigDecimal;
 public class PaypalPaymentActivity extends AppCompatActivity {
     private static final int PAYPAL_REQUEST_CODE = 7777;
     private FirebaseAuth firebaseAuth;
+    SharedPreferences sharedPref;
     private FirebaseFirestore db;
     FirebaseUser user;
     private static PayPalConfiguration config = new PayPalConfiguration()
@@ -47,6 +51,7 @@ public class PaypalPaymentActivity extends AppCompatActivity {
     MaterialButton btnPayNow;
     TextView providerNameText;
     TextView providerPriceText;
+    String providerID;
     String providerName;
     String providerPrice;
     String providerImg;
@@ -82,6 +87,9 @@ public class PaypalPaymentActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+        SharedPreferences sharedPref = getSharedPreferences("SomeName", Context.MODE_PRIVATE);
+         providerID = sharedPref.getString("String1", "defaultValue");
+        System.out.println(providerID);
         db.setFirestoreSettings(settings);
         user = firebaseAuth.getCurrentUser();
 
@@ -135,7 +143,7 @@ public class PaypalPaymentActivity extends AppCompatActivity {
     private void subToPackage(){
 
         ProviderDescriptionClass newProvider = new ProviderDescriptionClass(monday,tuesday,wednesday,thursday,friday,saturday,sunday,providerName,providerImg,providerPrice);
-        db.collection("Customers").document(mAuth.getCurrentUser().getUid()).collection("currentsub").document("provider")
+        db.collection("Customers").document(firebaseAuth.getCurrentUser().getUid()).collection("currentsub").document("provider")
                 .set(newProvider);
 
 
@@ -155,8 +163,9 @@ public class PaypalPaymentActivity extends AppCompatActivity {
                 if (snapshot != null && snapshot.exists()) {
                     System.out.println("Current data: " + snapshot.getData());
                     NewCustomer newCustomer = snapshot.toObject(NewCustomer.class);
-                    NewCustomer customer = new NewCustomer(mAuth.getCurrentUser().getUid(), newCustomer.getProfileImg().trim().toString(), newCustomer.getFirstName().trim().toString(), newCustomer.getLastName().trim().toString(), newCustomer.getEmail().trim().toString(), newCustomer.getDeliveryAddress().trim().toString());
-                    db.collection("Providers").document(mAuth.getCurrentUser().getUid()).collection("currentsub").document("provider")
+                    System.out.println(providerID);
+                    CustomerSubscribed customer = new CustomerSubscribed(user.getUid(), newCustomer.getProfileImg().trim().toString(), newCustomer.getFirstName().trim().toString(), newCustomer.getLastName().trim().toString(), newCustomer.getEmail().trim().toString(), newCustomer.getDeliveryAddress().trim().toString(),providerName,providerPrice,"123","3123","approved");
+                    db.collection("Providers").document(providerID).collection("currentsub").document(user.getUid())
                             .set(customer);
                 } else {
                     System.out.print("Current data: null");
@@ -171,12 +180,17 @@ public class PaypalPaymentActivity extends AppCompatActivity {
         if (requestCode == PAYPAL_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                System.out.println(confirmation);
                 if (confirmation != null) {
                     try {
                         String paymentDetails = confirmation.toJSONObject().toString(4);
-                        startActivity(new Intent(this, Dashboard.class));
+
+
                         subToPackage();
+
                         addCustomerToProvider();
+                        Intent intent = new Intent(this,Dashboard.class);
+                        startService(intent);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

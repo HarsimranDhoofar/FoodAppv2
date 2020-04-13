@@ -2,6 +2,7 @@ package com.example.foodapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +85,11 @@ public class ProviderDescriptionActivity extends AppCompatActivity {
         providersClass= (ProvidersClass) getIntent().getSerializableExtra("KEY_EVENT");
         System.out.println(providersClass.getUid());
         providerUid = providersClass.getUid();
+
+        SharedPreferences sharedPref = getSharedPreferences("SomeName", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("String1", providersClass.getUid());  // value is the string you want to save
+        editor.commit();
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         imageView = (ImageView) findViewById(R.id.collapseImageView);
         collapsingToolbar.setTitle(providersClass.getServiceName());
